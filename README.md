@@ -2,9 +2,17 @@ Classify person attributes like long, short, no **beard and hair**. **eyewear de
 
 This project implements a multi-head deep learning model that predicts multiple facial attributes from a single image using a shared backbone network.
 
-**Dataset:**
+## **Dataset:**
 I used the **CelebA dataset** which has 200k high quality images of faces of people.
 
+### link: https://www.kaggle.com/datasets/jessicali9530/celeba-dataset/data
+##
+Backbone: ResNet-18
+
+Framework: PyTorch
+
+Training Strategy: Multi-task learning
+##
 The model predicts:
 
   Hair type (3 classes)
@@ -17,15 +25,17 @@ The model predicts:
   
   Hat (2 classes)
   
-The backbone used is ResNet-18, with separate classification heads for each attribute.
-
+##
 Instead of training separate models for each attribute, this project uses:
   A shared ResNet18 backbone, Multiple independent classification heads, Joint training using summed loss
   
   This improves efficiency and generalization.
+##
+**Drive link for the **model trained on 10k images** of celebA dataset**
 
+https://drive.google.com/file/d/1pT-wrV93Qeja1jf5kbRTyA1aZ5YnrbK0/view?usp=drive_link
 
-**1️.model.py:**
+## **1️.model.py:**
 
   Defines the neural network architecture.
   
@@ -40,7 +50,7 @@ Instead of training separate models for each attribute, this project uses:
   Returns predictions as a dictionary
   
 
-**2. celeba_dataset.py:**
+## **2. celeba_dataset.py:**
 
   Custom PyTorch Dataset class.
   
@@ -63,7 +73,7 @@ Instead of training separate models for each attribute, this project uses:
     000001.jpg,1,0,0,1,0
 
    
-**3. train_multihead.py:**
+## **3. train_multihead.py:**
 
   Handles complete training pipeline:
   
@@ -80,15 +90,18 @@ Instead of training separate models for each attribute, this project uses:
   Model saving
 
 
-**4.batch_sort_predictions.py :**
+## **4.batch_sort_predictions.py :**
 
   Purpose:-
   
   This script performs batch inference on a folder of images and:
   
   Loads the trained multi-head model
-    Predicts all attributes for each image
-    Prints both human-readable and raw outputs
-    Automatically sorts images into predicted folders
-    Measures pure forward-pass inference time
-    This simulates a real-world deployment pipeline.
+  
+  Predicts all attributes for each image
+  
+  Prints both human-readable and raw outputs
+    
+  Automatically sorts images into predicted folders
+   Measures pure forward-pass inference time
+    
